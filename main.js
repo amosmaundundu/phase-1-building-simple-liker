@@ -1,9 +1,31 @@
-// Defining text characters for the empty and full hearts for you to use later.
-const EMPTY_HEART = '♡'
-const FULL_HEART = '♥'
+let heartFills =  {
+  "♡": "♥",
+  "♥": "♡"
+}
 
-// Your JavaScript code goes here!
+let heartColors = {
+  "red" : "",
+  "": "red"
+}
 
+let likeHearts = document.querySelectorAll(".like")
+let modal = document.querySelector('.hidden')
+
+function likes(event) {
+  let heart = event.target
+  mimicServerCall("someUrl")
+    .then(function(serverMessage){
+      heart.innerText = heartFills[heart.innerText];
+      heart.style.color = heartColors[heart.style.color];
+    })
+    .catch(function(error) {
+      document.getElementById("modal").className = ""
+    })  
+}
+
+for (let one of likeHearts) {
+  one.addEventListener("click", likes)
+}  
 
 
 
